@@ -10,7 +10,7 @@ st.set_page_config(layout="wide", page_title="APMC Data Explorer")
 @st.cache_data
 def load_data():
     try:
-        return pd.read_excel("/Users/yutika/Documents/BTP/Cleaned_APMC_Data.xlsx")
+        return pd.read_excel("Cleaned_APMC_Data.xlsx")
     except FileNotFoundError:
         st.error("The specified file was not found.")
         return pd.DataFrame()  # Return an empty DataFrame in case of error
@@ -19,7 +19,7 @@ def load_data():
 def load_geojson():
     try:
         # Update this path to your actual India shapefile location
-        return gpd.read_file("/Users/yutika/Documents/BTP/Geodata-of-India-master/India.shp")  # or .shp file
+        return gpd.read_file("Geodata-of-India-master/India.shp")  # or .shp file
     except FileNotFoundError:
         st.error("India shapefile not found. Choropleth map will not be available.")
         return None
