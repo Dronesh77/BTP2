@@ -3,58 +3,32 @@ import pandas as pd
 import plotly.express as px
 import pyarrow as pa
 import geopandas as gpd
-import io
 # Set page configuration 
 st.set_page_config(layout="wide", page_title="APMC Data Explorer")
 
 # Load cleaned data with error handling
 @st.cache_data
-# def load_data():
-#     try:
-#         return pd.read_excel("/Users/yutika/Documents/BTP/Cleaned_APMC_Data.xlsx")
-#     except FileNotFoundError:
-#         st.error("The specified file was not found.")
-#         return pd.DataFrame()  # Return an empty DataFrame in case of error
-
-# @st.cache_data
-# def load_geojson():
-#     try:
-#         # Update this path to your actual India shapefile location
-#         return gpd.read_file("/Users/yutika/Documents/BTP/Geodata-of-India-master/India.shp")  # or .shp file
-#     except FileNotFoundError:
-#         st.error("India shapefile not found. Choropleth map will not be available.")
-#         return None
-
-# # Load data
-# df = load_data()
-# india_gdf = load_geojson()
-
-def load_data(uploaded_file):
+def load_data():
     try:
-        # Read the file into a DataFrame
-        return pd.read_excel(uploaded_file)
-    except Exception as e:
-        st.error(f"Error loading data: {e}")
-        return pd.DataFrame()
+        return pd.read_excel("/Users/yutika/Documents/BTP/Cleaned_APMC_Data.xlsx")
+    except FileNotFoundError:
+        st.error("The specified file was not found.")
+        return pd.DataFrame()  # Return an empty DataFrame in case of error
 
-# Modify load_geojson function to use file uploader
 @st.cache_data
-def load_geojson(uploaded_geojson):
+def load_geojson():
     try:
-        # Read GeoJSON file
-        return gpd.read_file(uploaded_geojson)
-    except Exception as e:
-        st.error(f"Error loading GeoJSON: {e}")
+        # Update this path to your actual India shapefile location
+        return gpd.read_file("/Users/yutika/Documents/BTP/Geodata-of-India-master/India.shp")  # or .shp file
+    except FileNotFoundError:
+        st.error("India shapefile not found. Choropleth map will not be available.")
         return None
 
-# File uploaders
-uploaded_file = st.file_uploader("Upload APMC Data", type=["xlsx"])
-uploaded_geojson = st.file_uploader("Upload India GeoJSON", type=["shp"])
+# Load data
+df = load_data()
+india_gdf = load_geojson()
 
-if uploaded_file and uploaded_geojson:
-    # Load the uploaded data
-    df = load_data(uploaded_file)
-    india_gdf = load_geojson(uploaded_geojson)
+
 
 
 # Ensure the 'Date' column is in proper format
