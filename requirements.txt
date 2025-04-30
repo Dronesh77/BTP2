@@ -1,1 +1,4 @@
 plotly
+geopandas
+pyarrow
+pandas
