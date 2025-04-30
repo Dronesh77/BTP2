@@ -2,3 +2,4 @@ plotly
 geopandas
 pyarrow
 pandas
+streamlit
